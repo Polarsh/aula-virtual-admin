@@ -1,0 +1,37 @@
+{
+  "administrators": [
+    {
+      "id": "a6c6",
+      "firstName": "John",
+      "lastName": "Doe",
+      "dni": "87654321",
+      "email": "john.doe@example.com",
+      "phone": "987987987",
+      "role": "Administrador de Soporte",
+      "createdAt": 1670300000000,
+      "updatedAt": 1719591059630
+    },
+    {
+      "id": "b7d9",
+      "firstName": "Alice",
+      "lastName": "Smith",
+      "dni": "98765432C",
+      "email": "alice.smith@example.com",
+      "phone": 444444444,
+      "role": "Administrador",
+      "createdAt": 1670400000000,
+      "updatedAt": 1670410800000
+    },
+    {
+      "id": "f125",
+      "firstName": "John Doe",
+      "lastName": "Doe",
+      "dni": "12345678",
+      "email": "asd@gmail.com",
+      "phone": "999999999",
+      "role": "Administrador",
+      "createdAt": 1719526675402,
+      "updatedAt": 1719526675402
+    }
+  ]
+}
