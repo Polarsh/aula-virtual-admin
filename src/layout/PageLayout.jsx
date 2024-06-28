@@ -20,12 +20,11 @@ import SideBarComponent from './SideBar'
 import { useApp } from '../context/AppContext'
 
 import { findTitleByPath } from './Routes'
-import AlertComponent from '../components/utils/Alert'
 
 export default function PageLayout() {
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
-  const { darkMode, alertMessage, setDarkMode } = useApp()
+  const { darkMode, setDarkMode } = useApp()
 
   const location = useLocation()
   const path = location.pathname
@@ -140,13 +139,6 @@ export default function PageLayout() {
           </main>
         </div>
       </div>
-      {alertMessage && (
-        <AlertComponent
-          type={alertMessage.type}
-          title={alertMessage.title}
-          content={alertMessage.content}
-        />
-      )}
     </>
   )
 }
