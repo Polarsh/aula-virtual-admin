@@ -1,14 +1,14 @@
 import { useState } from 'react'
+
+import { toast } from 'sonner'
+
 import AdminService from '../services/AdminService'
-import { useApp } from '../context/AppContext'
 
 const useAdministrator = () => {
   const [administratorList, setAdministratorList] = useState([])
   const [administrator, setAdministrator] = useState(null)
   const [error, setError] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
-
-  const { setAlertMessage } = useApp()
 
   const getAllAdministrators = async () => {
     setIsLoading(true)
@@ -67,19 +67,11 @@ const useAdministrator = () => {
       await AdminService.deleteAdministrator(id)
       setError(null)
 
-      setAlertMessage({
-        type: 'success',
-        title: 'Administrador fue eliminado exitosamente',
-        content: 'Administrador fue eliminado exitosamente'
-      })
+      toast.success('Administrador fue eliminado exitosamente')
     } catch (error) {
       setError(error)
 
-      setAlertMessage({
-        type: 'error',
-        title: 'Error en la eliminación.',
-        content: error
-      })
+      toast.error('Administrador fue eliminado exitosamente')
     } finally {
       setIsLoading(false)
     }
