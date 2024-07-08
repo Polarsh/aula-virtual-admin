@@ -1,4 +1,4 @@
-export default function HeaderTable({ title, description }) {
+export default function TableTitle({ title, description }) {
   return (
     <div className='sm:flex sm:items-center'>
       <div className='sm:flex-auto'>
