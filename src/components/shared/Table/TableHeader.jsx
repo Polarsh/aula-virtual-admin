@@ -6,7 +6,7 @@ export default function TableHeader({ children, filtering, setFiltering }) {
         placeholder='Buscar...'
         value={filtering}
         onChange={e => setFiltering(e.target.value)}
-        className='block w-full sm:w-1/2 rounded-md border-0 py-1.5 bg-gray-100 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'
+        className='block w-full sm:w-1/2 rounded-md border-0 py-1.5 bg-white text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'
       />
       {children}
     </div>
