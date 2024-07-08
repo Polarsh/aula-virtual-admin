@@ -8,9 +8,12 @@ export default function TableNavigation({ table }) {
           <p className='text-sm text-gray-700'>
             Mostrando{' '}
             <span className='font-medium'>
-              {table.getState().pagination.pageIndex *
-                table.getState().pagination.pageSize +
-                1}
+              {Math.min(
+                table.getState().pagination.pageIndex *
+                  table.getState().pagination.pageSize +
+                  1,
+                table.getFilteredRowModel().rows.length
+              )}
             </span>{' '}
             a{' '}
             <span className='font-medium'>

@@ -1,11 +1,16 @@
 import { useEffect } from 'react'
+import { EyeIcon, PlusCircleIcon } from '@heroicons/react/20/solid'
+import { BiDownArrow } from 'react-icons/bi'
 
 import useAdministrator from '../../../hooks/useAdministrator'
 import useMyNavigate from '../../../hooks/useMyNavigate'
 
 import { formatDate } from '../../../utils/functions'
+
 import Table from '../../../components/shared/Table/Table'
-import { EyeIcon } from '@heroicons/react/20/solid'
+import CustomButton, {
+  ButtonStyle
+} from '../../../components/shared/Buttons/Buttons'
 
 export default function AdminMenuPage() {
   const { navigateToCreateAdmin, navigateToViewAdmin } = useMyNavigate()
@@ -36,40 +41,43 @@ export default function AdminMenuPage() {
   }
 
   if (error) {
-    return <div>Error: {error.message}</div>
+    // todo
+    /* return <div>Error: {error.message}</div> */
   }
 
   return (
     <div className='space-y-6'>
-      <Table data={administratorList} columns={columns}>
-        <Table.Title
-          title='Administradores'
-          description='Una lista de todos los administradores, con su nombre, correo electrónico y rol.'
-        />
-        <Table.Header>
-          <button
-            onClick={navigateToCreateAdmin}
-            type='button'
-            className='rounded-md bg-indigo-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'>
-            Exportar CSV
-          </button>
-          <button
-            onClick={navigateToCreateAdmin}
-            type='button'
-            className='rounded-md bg-indigo-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'>
-            Añadir administrador
-          </button>
-        </Table.Header>
-        <Table.Body
-          actionLabel={
-            <span className='flex gap-2'>
-              Visualizar
-              <EyeIcon aria-hidden='true' className='h-5 w-5 text-gray-400' />
-            </span>
-          }
-          onActionClick={navigateToViewAdmin}
-        />
-      </Table>
+      <Table.Title
+        title='Administradores'
+        description='Una lista de todos los administradores, con su nombre, correo electrónico y rol.'
+      />
+      <div className='mt-8 bg-white p-5 shadow-lg rounded-lg'>
+        <Table data={administratorList} columns={columns}>
+          <Table.Header>
+            <CustomButton
+              onClick={() => {}}
+              label={'Exportar CSV'}
+              icon={BiDownArrow}
+              variant={ButtonStyle.Fill}
+            />
+            <CustomButton
+              onClick={navigateToCreateAdmin}
+              label={'Añadir administrador'}
+              icon={PlusCircleIcon}
+              variant={ButtonStyle.Outline}
+            />
+          </Table.Header>
+          <Table.Body
+            actionLabel={
+              <span className='flex gap-2'>
+                Visualizar
+                <EyeIcon aria-hidden='true' className='h-5 w-5 text-gray-400' />
+              </span>
+            }
+            onActionClick={navigateToViewAdmin}
+          />
+        </Table>
+      </div>
     </div>
   )
 }

@@ -1,5 +1,4 @@
 import { flexRender } from '@tanstack/react-table'
-
 import {
   ChevronDownIcon,
   ChevronUpDownIcon,
@@ -7,6 +6,31 @@ import {
 } from '@heroicons/react/20/solid'
 
 export default function TableBody({ table, actionLabel, onActionClick }) {
+  const rowModel = table.getRowModel()
+
+  const SortIcon = ({ onClick, isSorted, label }) => {
+    return (
+      <div onClick={onClick} className='cursor-pointer' aria-label={label}>
+        {isSorted === 'asc' ? (
+          <ChevronUpIcon
+            aria-hidden='true'
+            className={`h-5 w-5 text-purple-500`}
+          />
+        ) : isSorted === 'desc' ? (
+          <ChevronDownIcon
+            aria-hidden='true'
+            className={`h-5 w-5 text-purple-500`}
+          />
+        ) : (
+          <ChevronUpDownIcon
+            aria-hidden='true'
+            className='h-5 w-5 text-gray-400'
+          />
+        )}
+      </div>
+    )
+  }
+
   return (
     <div className='flow-root'>
       <div className='overflow-x-auto -m-1 p-1'>
@@ -26,35 +50,11 @@ export default function TableBody({ table, actionLabel, onActionClick }) {
                             header.column.columnDef.header,
                             header.getContext()
                           )}
-                          <div
+                          <SortIcon
                             onClick={header.column.getToggleSortingHandler()}
-                            className='cursor-pointer'>
-                            {(() => {
-                              const isSorted = header.column.getIsSorted()
-                              if (isSorted === 'asc') {
-                                return (
-                                  <ChevronUpIcon
-                                    aria-hidden='true'
-                                    className={`h-5 w-5 ${isSorted ? 'text-purple-500' : 'text-gray-400'}`}
-                                  />
-                                )
-                              } else if (isSorted === 'desc') {
-                                return (
-                                  <ChevronDownIcon
-                                    aria-hidden='true'
-                                    className={`h-5 w-5 ${isSorted ? 'text-purple-500' : 'text-gray-400'}`}
-                                  />
-                                )
-                              } else {
-                                return (
-                                  <ChevronUpDownIcon
-                                    aria-hidden='true'
-                                    className='h-5 w-5 text-gray-400'
-                                  />
-                                )
-                              }
-                            })()}
-                          </div>
+                            isSorted={header.column.getIsSorted()}
+                            label={`Ordenar por ${header.column.columnDef.header}`}
+                          />
                         </div>
                       </th>
                     ))}
@@ -67,27 +67,39 @@ export default function TableBody({ table, actionLabel, onActionClick }) {
                 ))}
               </thead>
               <tbody className='divide-y divide-gray-200 bg-white'>
-                {table.getRowModel().rows.map(row => (
-                  <tr key={row.id}>
-                    {row.getVisibleCells().map((cell, index) => (
-                      <td
-                        key={cell.id}
-                        className={`whitespace-nowrap py-4 text-sm ${index === 0 ? 'pl-4 pr-3 font-medium text-gray-900 sm:pl-6' : 'px-3 text-gray-500'}`}>
-                        {flexRender(
-                          cell.column.columnDef.cell,
-                          cell.getContext()
-                        )}
+                {rowModel.rows.length > 0 ? (
+                  rowModel.rows.map(row => (
+                    <tr key={row.id}>
+                      {row.getVisibleCells().map((cell, index) => (
+                        <td
+                          key={cell.id}
+                          className={`whitespace-nowrap py-4 text-sm ${index === 0 ? 'pl-4 pr-3 font-medium text-gray-900 sm:pl-6' : 'px-3 text-gray-500'}`}>
+                          {flexRender(
+                            cell.column.columnDef.cell,
+                            cell.getContext()
+                          )}
+                        </td>
+                      ))}
+                      <td className='relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6'>
+                        <button
+                          onClick={() => onActionClick(row.original.id)}
+                          className='text-indigo-600 hover:text-indigo-900'>
+                          {actionLabel}
+                        </button>
                       </td>
-                    ))}
-                    <td className='relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6'>
-                      <button
-                        onClick={() => onActionClick(row.original.id)}
-                        className='text-indigo-600 hover:text-indigo-900'>
-                        {actionLabel}
-                      </button>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td
+                      colSpan={table.getHeaderGroups()[0].headers.length}
+                      className='py-4 text-center text-sm text-gray-500'>
+                      {table.getPreFilteredRowModel().rows.length === 0
+                        ? 'No hay datos disponibles.'
+                        : 'No hay datos que concuerden con el filtro.'}
                     </td>
                   </tr>
-                ))}
+                )}
               </tbody>
             </table>
           </div>
