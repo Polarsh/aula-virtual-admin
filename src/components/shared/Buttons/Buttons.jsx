@@ -9,11 +9,12 @@ const ButtonStyle = {
 export default function CustomButton({
   onClick,
   label,
+  disabled = false,
   icon: Icon,
   variant = ButtonStyle.Fill
 }) {
   const baseStyles =
-    'flex items-center rounded-md px-2.5 py-1.5 text-sm font-semibold shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2'
+    'flex items-center disabled:cursor-not-allowed rounded-md px-2.5 py-1.5 text-sm font-semibold shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2'
   const variants = {
     [ButtonStyle.Fill]:
       'bg-indigo-600 text-white hover:bg-indigo-500 focus-visible:outline-indigo-600',
@@ -31,6 +32,7 @@ export default function CustomButton({
     <button
       onClick={onClick}
       type='button'
+      disabled={disabled}
       className={`${baseStyles} ${variants[variant]}`}>
       {Icon && <Icon className='h-5 w-5 mr-2' aria-hidden='true' />}
       {label}
