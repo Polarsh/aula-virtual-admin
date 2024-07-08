@@ -5,6 +5,7 @@ import useMyNavigate from '../../../hooks/useMyNavigate'
 
 import { formatDate } from '../../../utils/functions'
 import Table from '../../../components/shared/Table/Table'
+import { EyeIcon } from '@heroicons/react/20/solid'
 
 export default function AdminMenuPage() {
   const { navigateToCreateAdmin, navigateToViewAdmin } = useMyNavigate()
@@ -40,7 +41,7 @@ export default function AdminMenuPage() {
 
   return (
     <div className='space-y-6'>
-      <Table>
+      <Table data={administratorList} columns={columns}>
         <Table.Title
           title='Administradores'
           description='Una lista de todos los administradores, con su nombre, correo electrónico y rol.'
@@ -60,8 +61,12 @@ export default function AdminMenuPage() {
           </button>
         </Table.Header>
         <Table.Body
-          data={administratorList}
-          columns={columns}
+          actionLabel={
+            <span className='flex gap-2'>
+              Visualizar
+              <EyeIcon aria-hidden='true' className='h-5 w-5 text-gray-400' />
+            </span>
+          }
           onActionClick={navigateToViewAdmin}
         />
       </Table>
