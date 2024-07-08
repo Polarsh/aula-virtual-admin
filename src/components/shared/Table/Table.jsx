@@ -52,9 +52,13 @@ Table.Title = ({ title, description }) => {
 }
 
 // Subcomponente Header
-Table.Header = ({ children, filtering, setFiltering }) => {
+Table.Header = ({ children, table, filtering, setFiltering, handleExport }) => {
   return (
-    <TableHeader filtering={filtering} setFiltering={setFiltering}>
+    <TableHeader
+      table={table}
+      handleExport={handleExport}
+      filtering={filtering}
+      setFiltering={setFiltering}>
       {children}
     </TableHeader>
   )

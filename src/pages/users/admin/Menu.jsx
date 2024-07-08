@@ -1,6 +1,5 @@
 import { useEffect } from 'react'
 import { EyeIcon, PlusCircleIcon } from '@heroicons/react/20/solid'
-import { BiDownArrow } from 'react-icons/bi'
 
 import useAdministrator from '../../../hooks/useAdministrator'
 import useMyNavigate from '../../../hooks/useMyNavigate'
@@ -11,6 +10,7 @@ import Table from '../../../components/shared/Table/Table'
 import CustomButton, {
   ButtonStyle
 } from '../../../components/shared/Buttons/Buttons'
+import { exportToExcel } from '../../../utils/excel'
 
 export default function AdminMenuPage() {
   const { navigateToCreateAdmin, navigateToViewAdmin } = useMyNavigate()
@@ -45,6 +45,20 @@ export default function AdminMenuPage() {
     /* return <div>Error: {error.message}</div> */
   }
 
+  const handleExport = jsonData => {
+    const transformedData = jsonData.map(row => ({
+      Nombre: `${row.firstName} ${row.lastName}`,
+      Email: row.email,
+      DNI: row.dni,
+      Teléfono: row.phone,
+      Rol: row.role,
+      'Fecha de Creación': new Date(parseInt(row.createdAt)).toLocaleString(),
+      'Última Actualización': new Date(parseInt(row.updatedAt)).toLocaleString()
+    }))
+
+    exportToExcel(transformedData, 'Administradores')
+  }
+
   return (
     <div className='space-y-6'>
       <Table.Title
@@ -53,13 +67,7 @@ export default function AdminMenuPage() {
       />
       <div className='mt-8 bg-white p-5 shadow-lg rounded-lg'>
         <Table data={administratorList} columns={columns}>
-          <Table.Header>
-            <CustomButton
-              onClick={() => {}}
-              label={'Exportar CSV'}
-              icon={BiDownArrow}
-              variant={ButtonStyle.Fill}
-            />
+          <Table.Header handleExport={handleExport}>
             <CustomButton
               onClick={navigateToCreateAdmin}
               label={'Añadir administrador'}
