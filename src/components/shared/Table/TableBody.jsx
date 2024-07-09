@@ -92,7 +92,7 @@ export default function TableBody({ table, actionItems }) {
                 ) : (
                   <tr>
                     <td
-                      colSpan={table.getHeaderGroups()[0].headers.length}
+                      colSpan={table.getHeaderGroups()[0].headers.length + 1}
                       className='py-4 text-center text-sm text-gray-500'>
                       {table.getPreFilteredRowModel().rows.length === 0
                         ? 'No hay datos disponibles.'
