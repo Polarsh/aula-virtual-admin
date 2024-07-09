@@ -70,18 +70,18 @@ export const routeNavigation = [
   }
 ]
 
-export function findTitleByPath (path) {
+export function findTitleByPath(path) {
   for (const item of routeNavigation) {
-    if (item.href === path) {
+    if (item.href && path.startsWith(item.href)) {
       return item.name
     }
     if (item.children) {
       for (const child of item.children) {
-        if (child.href === path) {
+        if (path.startsWith(child.href)) {
           return `${item.name} - ${child.name}`
         }
       }
     }
   }
-  return 'Path not found'
+  return 'Error en ruta'
 }
