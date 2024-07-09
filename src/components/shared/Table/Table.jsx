@@ -1,7 +1,6 @@
 /* eslint-disable react/display-name */
 import React, { useState } from 'react'
 
-import TableTitle from './TableTitle'
 import TableHeader from './TableHeader'
 import TableBody from './TableBody'
 import {
@@ -44,11 +43,6 @@ const Table = ({ children, data, columns }) => {
       })}
     </div>
   )
-}
-
-// Subcomponente Title
-Table.Title = ({ title, description }) => {
-  return <TableTitle title={title} description={description} />
 }
 
 // Subcomponente Header

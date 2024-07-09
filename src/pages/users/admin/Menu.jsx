@@ -9,12 +9,13 @@ import useAdministrator from '../../../hooks/useAdministrator'
 import useMyNavigate from '../../../hooks/useMyNavigate'
 
 import { formatDate } from '../../../utils/functions'
+import { exportToExcel } from '../../../utils/excel'
 
 import Table from '../../../components/shared/Table/Table'
 import CustomButton, {
   ButtonStyle
 } from '../../../components/shared/Buttons/Buttons'
-import { exportToExcel } from '../../../utils/excel'
+import Title from '../../../components/shared/Title'
 
 export default function AdminMenuPage() {
   const { navigateToCreateAdmin, navigateToViewAdmin, navigateToEditAdmin } =
@@ -79,7 +80,7 @@ export default function AdminMenuPage() {
 
   return (
     <div className='space-y-6'>
-      <Table.Title
+      <Title
         title='Administradores'
         description='Una lista de todos los administradores, con su nombre, correo electrónico y rol.'
       />

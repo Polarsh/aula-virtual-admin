@@ -1,4 +1,4 @@
-export default function TableTitle({ title, description }) {
+export default function Title({ title, description }) {
   return (
     <div className='sm:flex sm:items-center'>
       <div className='sm:flex-auto'>
