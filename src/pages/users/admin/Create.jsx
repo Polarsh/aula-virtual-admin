@@ -1,3 +1,5 @@
+import CardComponent from '../../../components/shared/Cards/Card'
+import Title from '../../../components/shared/Title'
 import AdminForm from '../../../components/users/AdminForm'
 
 export default function CreateAdminPage() {
@@ -11,19 +13,17 @@ export default function CreateAdminPage() {
   }
 
   return (
-    <div className='min-h-screen flex items-center justify-center'>
-      <div className='w-full space-y-8 bg-gray-50 p-10 rounded-xl shadow-lg'>
-        <div>
-          <h2 className='mt-6 text-center text-3xl font-extrabold text-gray-900'>
-            Crear Nuevo Administrador
-          </h2>
-        </div>
-        <AdminForm
-          initialData={initialData}
-          buttonText={'Crear'}
-          buttonTextSubmit={'Creando ...'}
+    <>
+      <div className='space-y-6'>
+        <Title
+          title={'Crear administrador'}
+          description={'Aqui podrás crear el detalle del administrador'}
         />
+
+        <CardComponent>
+          <AdminForm initialData={initialData} type={'create'} />
+        </CardComponent>
       </div>
-    </div>
+    </>
   )
 }
