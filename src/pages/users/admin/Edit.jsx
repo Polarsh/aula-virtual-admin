@@ -4,6 +4,8 @@ import { useEffect } from 'react'
 import AdminForm from '../../../components/users/AdminForm'
 
 import useAdministrator from '../../../hooks/useAdministrator'
+import CardComponent from '../../../components/shared/Cards/Card'
+import Title from '../../../components/shared/Title'
 
 export default function EditAdminPage() {
   const { adminId } = useParams()
@@ -22,20 +24,24 @@ export default function EditAdminPage() {
   if (!administrator) return <div>No se encontró el administrador</div>
 
   return (
-    <div className='min-h-screen flex items-center justify-center'>
-      <div className='w-full space-y-8 bg-gray-50 p-10 rounded-xl shadow-lg'>
-        <div>
-          <h2 className='mt-6 text-center text-3xl font-extrabold text-gray-900'>
-            Editar Administrador
-          </h2>
-        </div>
-        <AdminForm
-          adminId={adminId}
-          initialData={initialData}
-          buttonText={'Guardar cambios'}
-          buttonTextSubmit={'Guardando ...'}
+    <>
+      <div className='space-y-6'>
+        <Title
+          title={'Editar administrador'}
+          description={'Aqui podras editar el detalle del administrador'}
         />
+
+        {administrator && (
+          <CardComponent>
+            <AdminForm
+              adminId={adminId}
+              initialData={initialData}
+              buttonText={'Guardar cambios'}
+              buttonTextSubmit={'Guardando ...'}
+            />
+          </CardComponent>
+        )}
       </div>
-    </div>
+    </>
   )
 }
