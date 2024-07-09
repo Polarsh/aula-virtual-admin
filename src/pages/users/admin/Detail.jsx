@@ -48,11 +48,11 @@ export default function ViewAdminPage() {
 
   const administratorDetails = [
     {
-      label: 'Nombre',
+      label: 'Nombres',
       value: administrator.firstName
     },
     {
-      label: 'Apellido',
+      label: 'Apellidos',
       value: administrator.lastName
     },
     { label: 'DNI', value: administrator.dni },
