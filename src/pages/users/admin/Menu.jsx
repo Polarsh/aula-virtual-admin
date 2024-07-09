@@ -83,22 +83,20 @@ export default function AdminMenuPage() {
         title='Administradores'
         description='Una lista de todos los administradores, con su nombre, correo electrónico y rol.'
       />
-      <div className='mt-8 bg-white p-5 shadow-lg rounded-lg'>
-        <Table data={administratorList} columns={columns}>
-          <Table.Header handleExport={handleExport}>
-            <CustomButton
-              onClick={navigateToCreateAdmin}
-              label={'Añadir administrador'}
-              icon={PlusCircleIcon}
-              variant={ButtonStyle.Fill}
-            />
-          </Table.Header>
-          <Table.Body
-            actionItems={actionItems}
-            onActionClick={navigateToViewAdmin}
+      <Table data={administratorList} columns={columns}>
+        <Table.Header handleExport={handleExport}>
+          <CustomButton
+            onClick={navigateToCreateAdmin}
+            label={'Añadir administrador'}
+            icon={PlusCircleIcon}
+            variant={ButtonStyle.Fill}
           />
-        </Table>
-      </div>
+        </Table.Header>
+        <Table.Body
+          actionItems={actionItems}
+          onActionClick={navigateToViewAdmin}
+        />
+      </Table>
     </div>
   )
 }
