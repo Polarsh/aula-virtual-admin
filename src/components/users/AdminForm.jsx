@@ -4,12 +4,7 @@ import { adminSchema } from '../../services/AdminService'
 import useAdministrator from '../../hooks/useAdministrator'
 import useMyNavigate from '../../hooks/useMyNavigate'
 
-export default function AdminForm({
-  adminId,
-  initialData,
-  buttonText,
-  buttonTextSubmit
-}) {
+export default function AdminForm({ adminId, initialData, type }) {
   const { createAdministrator, updateAdministrator, isLoading, error } =
     useAdministrator()
   const { navigateToAdminMenu } = useMyNavigate()
@@ -26,10 +21,10 @@ export default function AdminForm({
 
   const onSubmit = async data => {
     try {
-      if (adminId) {
-        await updateAdministrator(adminId, data)
-      } else {
+      if (type === 'create') {
         await createAdministrator(data)
+      } else {
+        await updateAdministrator(adminId, data)
       }
       navigateToAdminMenu()
       reset()
@@ -48,6 +43,9 @@ export default function AdminForm({
     'w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none focus:border-blue-500'
   const labelClass = 'block mb-2 text-sm font-bold text-gray-700'
   const errorClass = 'mt-1 text-xs text-red-500'
+
+  const buttonText = type === 'create' ? 'Crear' : 'Editar'
+  const buttonTextSubmit = type === 'create' ? 'Creando...' : 'Editando...'
 
   return (
     <>

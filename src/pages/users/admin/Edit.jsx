@@ -36,8 +36,7 @@ export default function EditAdminPage() {
             <AdminForm
               adminId={adminId}
               initialData={initialData}
-              buttonText={'Guardar cambios'}
-              buttonTextSubmit={'Guardando ...'}
+              type={'edit'}
             />
           </CardComponent>
         )}
