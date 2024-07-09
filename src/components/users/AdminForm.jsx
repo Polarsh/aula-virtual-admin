@@ -51,7 +51,7 @@ export default function AdminForm({
 
   return (
     <>
-      <form className='mt-8 space-y-6' onSubmit={handleSubmit(onSubmit)}>
+      <form className='space-y-6' onSubmit={handleSubmit(onSubmit)}>
         <div className='grid grid-cols-2 gap-6'>
           {/* Nombre */}
           <div>
