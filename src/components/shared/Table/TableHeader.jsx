@@ -1,6 +1,6 @@
 import { CiSearch } from 'react-icons/ci'
 import CustomButton, { ButtonStyle } from '../Buttons/Buttons'
-import { BiDownArrow } from 'react-icons/bi'
+import { TiExport } from 'react-icons/ti'
 
 export default function TableHeader({
   children,
@@ -23,8 +23,8 @@ export default function TableHeader({
           }}
           disabled={table.getFilteredRowModel().rows.length === 0}
           label={'Exportar CSV'}
-          icon={BiDownArrow}
-          variant={ButtonStyle.Fill}
+          icon={TiExport}
+          variant={ButtonStyle.Outline}
         />
         {children}
       </div>
