@@ -1,10 +1,19 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
+import { BiSave } from 'react-icons/bi'
+import { TrashIcon } from '@heroicons/react/20/solid'
+
 import useAdministrator from '../../../hooks/useAdministrator'
 import useMyNavigate from '../../../hooks/useMyNavigate'
 
 import DeleteModalValidation from '../../../components/shared/Modals/Delete'
+import Title from '../../../components/shared/Title'
+import CustomButton, {
+  ButtonStyle
+} from '../../../components/shared/Buttons/Buttons'
+import CardComponent from '../../../components/shared/Cards/Card'
+import { formatDateTime } from '../../../utils/functions'
 
 export default function ViewAdminPage() {
   const { adminId } = useParams()
@@ -37,72 +46,68 @@ export default function ViewAdminPage() {
   if (error) return <div>Error: {error.message}</div>
   if (!administrator) return <div>No se encontró el administrador</div>
 
+  const administratorDetails = [
+    {
+      label: 'Nombre',
+      value: administrator.firstName
+    },
+    {
+      label: 'Apellido',
+      value: administrator.lastName
+    },
+    { label: 'DNI', value: administrator.dni },
+    { label: 'Email', value: administrator.email },
+    { label: 'Teléfono', value: administrator.phone },
+    { label: 'Rol', value: administrator.role },
+    {
+      label: 'Creado en',
+      value: formatDateTime(administrator.createdAt)
+    },
+    {
+      label: 'Última actualización',
+      value: formatDateTime(administrator.updatedAt)
+    }
+  ]
+
+  const labelClass = 'block mb-2 text-sm font-bold text-gray-700'
+  const inputClass =
+    'w-full px-3 py-2 text-gray-700 border rounded-lg border-gray-700'
+
   return (
     <>
-      <div className='mx-auto max-w-lg p-8 bg-white shadow-md rounded-md'>
-        <h2 className='text-2xl font-bold mb-4'>Detalles del Administrador</h2>
-        <h2 className='text-2xl font-bold mb-4'>
-          show: {showDeleteModal ? 'true' : 'false'}
-        </h2>
+      <div className='space-y-6'>
+        <Title
+          title={'Detalles del administrador'}
+          description={'Aqui podras encontrar el detalle del administrador'}
+        />
+
         {administrator && (
-          <div>
-            <div className='space-y-4'>
-              <div>
-                <label className='block text-gray-600 text-sm font-semibold mb-1'>
-                  Nombre completo:
-                </label>
-                <p>{administrator.fullName}</p>
-              </div>
-              <div>
-                <label className='block text-gray-600 text-sm font-semibold mb-1'>
-                  DNI:
-                </label>
-                <p>{administrator.dni}</p>
-              </div>
-              <div>
-                <label className='block text-gray-600 text-sm font-semibold mb-1'>
-                  Email:
-                </label>
-                <p>{administrator.email}</p>
-              </div>
-              <div>
-                <label className='block text-gray-600 text-sm font-semibold mb-1'>
-                  Teléfono:
-                </label>
-                <p>{administrator.phone}</p>
-              </div>
-              <div>
-                <label className='block text-gray-600 text-sm font-semibold mb-1'>
-                  Rol:
-                </label>
-                <p>{administrator.role}</p>
-              </div>
-              <div>
-                <label className='block text-gray-600 text-sm font-semibold mb-1'>
-                  Creado en:
-                </label>
-                <p>{new Date(administrator.createdAt).toLocaleDateString()}</p>
-              </div>
-              <div>
-                <label className='block text-gray-600 text-sm font-semibold mb-1'>
-                  Última actualización:
-                </label>
-                <p>{new Date(administrator.updatedAt).toLocaleDateString()}</p>
-              </div>
+          <CardComponent>
+            <div className='grid grid-cols-1 sm:grid-cols-2 gap-6'>
+              {administratorDetails.map((detail, index) => (
+                <div key={detail.label}>
+                  <label className={labelClass}>{detail.label}</label>
+                  <div className={inputClass}>{detail.value}</div>
+                </div>
+              ))}
             </div>
-            <div className='mt-6'>
-              <button
-                onClick={() => navigateToEditAdmin(adminId)}
-                className='bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md mr-4'>
-                Editar
-              </button>
-              <button
+
+            {/* Botones */}
+            <div className='mt-6 flex flex-wrap gap-4 justify-end sm:flex-nowrap'>
+              <CustomButton
                 onClick={() => setShowDeleteModal(!showDeleteModal)}
-                className='bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-md'>
-                Eliminar
-              </button>
+                label={'Eliminar'}
+                icon={TrashIcon}
+                variant={ButtonStyle.Cancel}
+              />
+              <CustomButton
+                onClick={() => navigateToEditAdmin(adminId)}
+                label={'Editar'}
+                icon={BiSave}
+                variant={ButtonStyle.Fill}
+              />
             </div>
-          </div>
+          </CardComponent>
         )}
       </div>
       {showDeleteModal ? (
