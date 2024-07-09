@@ -72,7 +72,7 @@ export default function AdminMenuPage() {
               onClick={navigateToCreateAdmin}
               label={'Añadir administrador'}
               icon={PlusCircleIcon}
-              variant={ButtonStyle.Outline}
+              variant={ButtonStyle.Fill}
             />
           </Table.Header>
           <Table.Body
