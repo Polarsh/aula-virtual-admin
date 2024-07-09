@@ -1,5 +1,9 @@
 import { useEffect } from 'react'
-import { EyeIcon, PlusCircleIcon } from '@heroicons/react/20/solid'
+import {
+  EyeIcon,
+  PencilSquareIcon,
+  PlusCircleIcon
+} from '@heroicons/react/20/solid'
 
 import useAdministrator from '../../../hooks/useAdministrator'
 import useMyNavigate from '../../../hooks/useMyNavigate'
@@ -13,7 +17,8 @@ import CustomButton, {
 import { exportToExcel } from '../../../utils/excel'
 
 export default function AdminMenuPage() {
-  const { navigateToCreateAdmin, navigateToViewAdmin } = useMyNavigate()
+  const { navigateToCreateAdmin, navigateToViewAdmin, navigateToEditAdmin } =
+    useMyNavigate()
   const { administratorList, isLoading, error, getAllAdministrators } =
     useAdministrator()
 
@@ -29,6 +34,19 @@ export default function AdminMenuPage() {
       accessorKey: 'createdAt',
       cell: info => formatDate(info.row.original.createdAt),
       sortingFn: 'datetime'
+    }
+  ]
+
+  const actionItems = [
+    {
+      label: 'Ver',
+      icon: EyeIcon,
+      action: navigateToViewAdmin
+    },
+    {
+      label: 'Editar',
+      icon: PencilSquareIcon,
+      action: navigateToEditAdmin
     }
   ]
 
@@ -76,12 +94,7 @@ export default function AdminMenuPage() {
             />
           </Table.Header>
           <Table.Body
-            actionLabel={
-              <span className='flex gap-2'>
-                Visualizar
-                <EyeIcon aria-hidden='true' className='h-5 w-5 text-gray-400' />
-              </span>
-            }
+            actionItems={actionItems}
             onActionClick={navigateToViewAdmin}
           />
         </Table>

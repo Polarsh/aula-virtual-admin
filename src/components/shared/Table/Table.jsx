@@ -65,14 +65,10 @@ Table.Header = ({ children, table, filtering, setFiltering, handleExport }) => {
 }
 
 // Subcomponente Body
-Table.Body = ({ table, actionLabel, onActionClick }) => {
+Table.Body = ({ table, actionItems }) => {
   return (
     <>
-      <TableBody
-        table={table}
-        actionLabel={actionLabel}
-        onActionClick={onActionClick}
-      />
+      <TableBody table={table} actionItems={actionItems} />
       <TableNavigation table={table} />
     </>
   )

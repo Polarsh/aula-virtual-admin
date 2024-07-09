@@ -4,8 +4,9 @@ import {
   ChevronUpDownIcon,
   ChevronUpIcon
 } from '@heroicons/react/20/solid'
+import TableAction from './TableAction'
 
-export default function TableBody({ table, actionLabel, onActionClick }) {
+export default function TableBody({ table, actionItems }) {
   const rowModel = table.getRowModel()
 
   const SortIcon = ({ onClick, isSorted, label }) => {
@@ -81,11 +82,10 @@ export default function TableBody({ table, actionLabel, onActionClick }) {
                         </td>
                       ))}
                       <td className='relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6'>
-                        <button
-                          onClick={() => onActionClick(row.original.id)}
-                          className='text-indigo-600 hover:text-indigo-900'>
-                          {actionLabel}
-                        </button>
+                        <TableAction
+                          actionItems={actionItems}
+                          id={row.original.id}
+                        />
                       </td>
                     </tr>
                   ))
