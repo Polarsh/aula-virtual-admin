@@ -2,6 +2,9 @@
 
 Este es el proyecto **Aula Virtual Admin**, diseñado como un panel de administración para gestionar la plataforma del aula virtual. Aunque el proyecto ha sido **pausado**, ya se han implementado algunas funcionalidades clave, como el **CRUD** usando `json-server`, la capacidad de **exportar datos a Excel**, y **notificaciones** utilizando **Sonner**.
 
+Puedes acceder a la aplicación en el siguiente enlace:  
+[Aula Virtual - Admin Panel](https://aula-virtual-admin-dybsm98.firebaseapp.com/)
+
 ## Estado del Proyecto
 
 Actualmente, el desarrollo de este proyecto está **pausado**, pero puede ser retomado en el futuro para continuar con la implementación de nuevas características.
